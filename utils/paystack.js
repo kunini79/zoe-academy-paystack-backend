@@ -8,8 +8,9 @@ async function verifyPaystackTransaction(transactionRef, paidAmountKobo, secretK
         const verificationResponse = await axios.get(
             `https://api.paystack.co/transaction/verify/${transactionRef}`,
             {
-                headers: {
+                 headers: {
                     Authorization: `Bearer ${secretKey}`,
+                    'X-Paystack-Api-Version': '2020-08-10' // <--- ADD THIS LINE
                 },
             }
         );

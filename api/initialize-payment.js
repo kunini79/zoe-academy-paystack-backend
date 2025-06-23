@@ -9,7 +9,7 @@ const cors = require('cors'); // Vercel functions handle CORS, but explicit can 
 module.exports = async (req, res) => {
     // Setup CORS for this specific function. Replace with your actual InfinityFree domain.
     await new Promise(resolve => cors({
-        origin: 'https://yourzoeacademyfrontend.infinityfreeapp.com', // <<< REPLACE THIS!
+        origin: 'https://zoeacademy.infy.uk', 
         methods: ['POST'],
         allowedHeaders: ['Content-Type'],
     })(req, res, resolve));
@@ -90,17 +90,18 @@ module.exports = async (req, res) => {
                     email: email, // Useful to have email in metadata for webhook
                     cohort: 'Cohort 3',
                     amount_naira: amount, // Keep original Naira amount in metadata for reference
+                    callback_url: `https://zoeacademy.infy.uk/payment-success.html?ref={{reference}}`
                 },
                 // Optional: callback_url for redirection after payment on Paystack's side.
                 // For Vercel, if you need a callback_url, it should point to your InfinityFree domain.
-                // callback_url: `https://yourzoeacademyfrontend.infinityfreeapp.com/payment-success.html?ref={{reference}}`
+                // callback_url: `https://zoeacademy.infy.uk/payment-success.html?ref={{reference}}`
             },
             {
-                headers: {
-                    // Authorization header with your SECRET KEY for secure API calls
-                    Authorization: `Bearer ${PAYSTACK_SECRET_KEY}`,
-                    'Content-Type': 'application/json',
-                },
+                 headers: {
+                        Authorization: `Bearer ${PAYSTACK_SECRET_KEY}`,
+                        'Content-Type': 'application/json',
+                        'X-Paystack-Api-Version': '2020-08-10' // <--- ADD THIS LINE
+                    },
             }
         );
 
