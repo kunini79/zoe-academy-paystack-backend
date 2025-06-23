@@ -9,7 +9,7 @@ const cors = require('cors'); // Vercel functions handle CORS, but explicit can 
 module.exports = async (req, res) => {
     // Setup CORS for this specific function. Replace with your actual InfinityFree domain.
     await new Promise(resolve => cors({
-        origin: 'https://yourzoeacademyfrontend.infinityfreeapp.com', // <<< REPLACE THIS!
+        origin: 'https://zoeacademy.infy.uk', // <<< REPLACE THIS!
         methods: ['POST'],
         allowedHeaders: ['Content-Type'],
     })(req, res, resolve));
